@@ -25,3 +25,7 @@ six==1.17.0
 tzdata==2025.2
 xarray==2025.3.1
 seabird==0.12.0
+setuptools==76.0.0
+setuptools-metadata==0.1.5
+types-requests==2.32.0.20250306
+types-setuptools==76.0.0.20250313
