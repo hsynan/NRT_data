@@ -3,6 +3,8 @@ name: run ECOMON_NRT_PLOTTING.py
 on:
   schedule:
     - cron: '27 12 * * 3' # At 12:22 on Wednesday
+  workflow dispatch: 
+  
 
 jobs:
   build:
