@@ -2,7 +2,7 @@ name: run ECOMON_NRT_PLOTTING.py
 
 on:
   schedule:
-    - cron: '0 0 * * 1' # At 00:00 on Monday
+    - cron: '0 0 * * 1' # At 12:22 on Wednesday
 
 jobs:
   build:
