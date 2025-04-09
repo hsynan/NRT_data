@@ -15,6 +15,11 @@ Purpose:
     This script downloads and plots ALL the available cruises. You could manually change ```folds```
     variable to be 1 cruise (instead of all). The script checks to see if a file exists already, 
     if it doesn't, the data gets downloaded and plotted. If the file does exists, the file is skipped. 
+    
+History:
+    * 3/18/25: script initialized
+    * 4/9/25: script updated to remove "magic" commands (that can only run in an ipython environment),
+    allowing script to run in shell environment
 """
 
 import os
