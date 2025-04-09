@@ -199,7 +199,6 @@ os.system('git pull origin main')
 os.system('git add --all')
 os.system('git commit -m "adding new plots"')
 os.system('git push -u origin head')
-          #head')
 
 
 
