@@ -193,16 +193,17 @@ for x in range(len(fnames)):
                     cb.ax.invert_yaxis()
                     fig.tight_layout()
                     plt.show()
-                    fig.savefig(plotdir + '\Cast'+supname.splitlines()[0].split()[2]+ supname.splitlines()[0].split()[0]+ '.jpg',  dpi=400, bbox_inches='tight') #, pad_inches = -4)
+                    #fig.savefig(plotdir + '\Cast'+supname.splitlines()[0].split()[2]+ supname.splitlines()[0].split()[0]+ '.jpg',  dpi=400, bbox_inches='tight') #, pad_inches = -4)
+                    fig.savefig(proj_name + '\Cast'+supname.splitlines()[0].split()[2]+ supname.splitlines()[0].split()[0]+ '.jpg',  dpi=400, bbox_inches='tight') #, pad_inches = -4)
             except:
                 continue
             
 #push to github
-os.chdir(data_dir)
-os.system('git pull origin main')
+#os.chdir(data_dir)
+#os.system('git pull origin main')
 #add all changed files, commit with message, and push
-os.system('git add --all')
-os.system('git commit -m "adding new plots"')
-os.system('git push -u origin head')
+#os.system('git add --all')
+#os.system('git commit -m "adding new plots"')
+#os.system('git push -u origin head')
 
 
