@@ -2,7 +2,7 @@ name: run CODE/NRT_PLOTTING_GHACTION.py
 
 on:
   schedule:
-    - cron: '27 12 * * 3' # At 12:22 on Wednesday
+    - cron: '0 8 * * *' # run at 8:00 everyday
   workflow_dispatch: 
   
 
