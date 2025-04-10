@@ -72,7 +72,7 @@ bathym = cfeature.NaturalEarthFeature(name='bathymetry_K_200', scale='10m', cate
 bathym = cascaded_union(list(bathym.geometries()))
 
 for x in range(len(fnames)): 
-    fnames[x]=str(fnames[x])
+    fnames[x]=str(fnames[x]).split("'")[1]
     proj_name = fnames[x].split('/')[4]
     data_dir_fold = data_dir+'\\'+proj_name
     plotdir=data_dir+'\\'+proj_name+'\PLOTS'
@@ -204,10 +204,5 @@ for x in range(len(fnames)):
 #os.system('git add --all')
 #os.system('git commit -m "adding new plots"')
 #os.system('git push -u origin head')
-
-
-
-
-
 
 
