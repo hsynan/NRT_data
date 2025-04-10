@@ -53,7 +53,7 @@ a = os.popen('gsutil ls -l gs://nmfs_odp_nefsc/NEFSC_CTD_Program_near_real_time_
 #aa = [s[12:].split('  ') for s in a] #split into nested list --> date and file path
 
 new_d8 = date.today() #get todays date 
-new_d8 = new_d8 - timedelta(days=7) #get last weeks date (this script will be run weekly)
+new_d8 = new_d8 - timedelta(days=2) #get last weeks date (this script will be run weekly)
 
 aa = [s[12:].split('  ')[0].split('T')[0] for s in a]
 aa= aa[:-2] #remove last 2 strings in list (they are metadata, not valid dates)
