@@ -1,4 +1,4 @@
-name: run CODE/ECOMON_NRT_PLOTTING.py
+name: run CODE/NRT_PLOTTING_GHACTION.py
 
 on:
   schedule:
@@ -24,10 +24,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           
-      - name: execute py script # run CODE/ECOMON_NRT_PLOTTING.py
+      - name: execute py script # run CODE/NRT_PLOTTING_GHACTION.py
         env:
           SOME_SECRET: ${{ secrets.SOME_SECRET }}
-        run: python CODE/ECOMON_NRT_PLOTTING.py
+        run: python CODE/NRT_PLOTTING_GHACTION.py
           
       - name: commit files
         run: |
