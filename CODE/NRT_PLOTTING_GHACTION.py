@@ -18,7 +18,7 @@ import urllib.request
 import cartopy
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 import cartopy.feature as cfeature
-from shapely.ops import cascaded_union
+from shapely.ops import unary_union
 from glob import glob
 import gsw
 from datetime import datetime
@@ -29,6 +29,7 @@ warnings.filterwarnings('ignore', category=UserWarning)
 #set local directory
 try: 
     data_dir = r'C:\Users\haley.synan\Documents\DATA\NRT_DATA'
+    os.chdir(data_dir)
 except: 
     data_dir = os.getcwd()
     
@@ -69,7 +70,7 @@ for x in range(len(idx)):
     fnames.append(paths[idx[x]]) #get new files to plot using indices of new dates
     
 bathym = cfeature.NaturalEarthFeature(name='bathymetry_K_200', scale='10m', category='physical')
-bathym = cascaded_union(list(bathym.geometries()))
+bathym = unary_union(list(bathym.geometries()))
 
 for x in range(len(fnames)): 
     fnames[x]=str(fnames[x]).split("'")[1]
@@ -194,7 +195,8 @@ for x in range(len(fnames)):
                     fig.tight_layout()
                     plt.show()
                     #fig.savefig(plotdir + '\Cast'+supname.splitlines()[0].split()[2]+ supname.splitlines()[0].split()[0]+ '.jpg',  dpi=400, bbox_inches='tight') #, pad_inches = -4)
-                    fig.savefig(proj_name + '/PLOTS'+'/Cast'+supname.splitlines()[0].split()[2]+ supname.splitlines()[0].split()[0]+ '.jpg',  dpi=400, bbox_inches='tight') #, pad_inches = -4)
+                    fig.savefig(r'C:\\Users\\haley.synan\\Documents\\DATA\\NRT_DATA\\'+proj_name + '/PLOTS'+'/Cast'+supname.splitlines()[0].split()[2]+ supname.splitlines()[0].split()[0]+ '.jpg',  dpi=400, bbox_inches='tight') 
+                    #fig.savefig(proj_name + '/PLOTS'+'/Cast'+supname.splitlines()[0].split()[2]+ supname.splitlines()[0].split()[0]+ '.jpg',  dpi=400, bbox_inches='tight') #, pad_inches = -4)
             except:
                 continue
             
