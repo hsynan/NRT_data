@@ -1,25 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Mar 18 09:16:34 2025
+Created on Thu Apr 10 10:03:26 2025
 
 @author: haley.synan
-
-Title: 
-    ECOMON_NRT_PLOTTING.py 
-    
-Purpose: 
-    Plot ecomon data from the google cloud storage, which allows for 
-    plotting of NRT casts during cruises. 
-    NOTE: data has not been QA/QCed yet
-    
-    This script downloads and plots ALL the available cruises. You could manually change ```folds```
-    variable to be 1 cruise (instead of all). The script checks to see if a file exists already, 
-    if it doesn't, the data gets downloaded and plotted. If the file does exists, the file is skipped. 
-    
-History:
-    * 3/18/25: script initialized
-    * 4/9/25: script updated to remove "magic" commands (that can only run in an ipython environment),
-    allowing script to run in shell environment
 """
 
 import os
@@ -35,17 +18,21 @@ import urllib.request
 import cartopy
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 import cartopy.feature as cfeature
-from shapely.ops import cascaded_union
+from shapely.ops import unary_union
 from glob import glob
 import gsw
+from datetime import datetime
+from datetime import date, timedelta
 warnings.filterwarnings('ignore', category=SyntaxWarning)
 warnings.filterwarnings('ignore', category=UserWarning)
 
 #set local directory
 try: 
     data_dir = r'C:\Users\haley.synan\Documents\DATA\NRT_DATA'
+    os.chdir(data_dir)
 except: 
     data_dir = os.getcwd()
+    
     
 folds= os.popen('gsutil ls gs://nmfs_odp_nefsc/NEFSC_CTD_Program_near_real_time_data').read().split('\n')[2:-2]
 
@@ -61,13 +48,32 @@ for cruise in folds:
     except:
         os.chdir(data_dir+'\\'+proj_name+'\PLOTS')
         
-fnames = os.popen('gsutil ls gs://nmfs_odp_nefsc/NEFSC_CTD_Program_near_real_time_data/*/*.cnv').read().split('\n')[:-1]
-#fnames=fnames.list
+a = os.popen('gsutil ls -l gs://nmfs_odp_nefsc/NEFSC_CTD_Program_near_real_time_data/*/*.cnv').read().split('\n')
 
+#a[0].split('  ')
+#aa = [s[12:].split('  ') for s in a] #split into nested list --> date and file path
+
+new_d8 = date.today() #get todays date 
+new_d8 = new_d8 - timedelta(days=2) #get last weeks date (this script will be run weekly)
+
+aa = [s[12:].split('  ')[0].split('T')[0] for s in a]
+aa= aa[:-2] #remove last 2 strings in list (they are metadata, not valid dates)
+d8 = [datetime.strptime(date, "%Y-%m-%d").date() for date in aa]
+
+idx= [i for i, element in enumerate(d8) if element >= new_d8] #get indices for dates to plot
+#valid_dates = [x for x in d8 if x>=new_d8] #get datetime of new/valid times
+
+t = [s[12:].split('  ') for s in a] #split date/paths into nested list of strings
+paths = [sublist[1:] for sublist in t] #get file paths only (remove dates)
+fnames=[]
+for x in range(len(idx)):
+    fnames.append(paths[idx[x]]) #get new files to plot using indices of new dates
+    
 bathym = cfeature.NaturalEarthFeature(name='bathymetry_K_200', scale='10m', category='physical')
-bathym = cascaded_union(list(bathym.geometries()))
+bathym = unary_union(list(bathym.geometries()))
 
 for x in range(len(fnames)): 
+    fnames[x]=str(fnames[x]).split("'")[1]
     proj_name = fnames[x].split('/')[4]
     data_dir_fold = data_dir+'\\'+proj_name
     plotdir=data_dir+'\\'+proj_name+'\PLOTS'
@@ -188,7 +194,9 @@ for x in range(len(fnames)):
                     cb.ax.invert_yaxis()
                     fig.tight_layout()
                     plt.show()
-                    fig.savefig(plotdir + '\Cast'+supname.splitlines()[0].split()[2]+ supname.splitlines()[0].split()[0]+ '.jpg',  dpi=400, bbox_inches='tight') #, pad_inches = -4)
+                    #fig.savefig(plotdir + '\Cast'+supname.splitlines()[0].split()[2]+ supname.splitlines()[0].split()[0]+ '.jpg',  dpi=400, bbox_inches='tight') #, pad_inches = -4)
+                    fig.savefig(r'C:\\Users\\haley.synan\\Documents\\DATA\\NRT_DATA\\'+proj_name + '/PLOTS'+'/Cast'+supname.splitlines()[0].split()[2]+ supname.splitlines()[0].split()[0]+ '.jpg',  dpi=400, bbox_inches='tight') 
+                    #fig.savefig(proj_name + '/PLOTS'+'/Cast'+supname.splitlines()[0].split()[2]+ supname.splitlines()[0].split()[0]+ '.jpg',  dpi=400, bbox_inches='tight') #, pad_inches = -4)
             except:
                 continue
             
@@ -199,10 +207,5 @@ for x in range(len(fnames)):
 #os.system('git add --all')
 #os.system('git commit -m "adding new plots"')
 #os.system('git push -u origin head')
-
-
-
-
-
 
 
