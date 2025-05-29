@@ -20,8 +20,20 @@ pyshp==2.3.1
 python-dateutil==2.9.0.post0
 pytz==2025.2
 scipy==1.15.2
+<<<<<<< HEAD
 seabird==0.12.0
 shapely==2.1.0
 six==1.17.0
 tzdata==2025.2
 xarray==2025.3.1
+=======
+shapely==2.0.7
+six==1.17.0
+tzdata==2025.2
+xarray==2025.3.1
+seabird==0.12.0
+setuptools==76.0.0
+setuptools-metadata==0.1.5
+types-requests==2.32.0.20250306
+types-setuptools==76.0.0.20250313
+>>>>>>> cf284f9db618c5c386b0525d6b7f4798c5808747
