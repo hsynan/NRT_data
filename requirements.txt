@@ -34,4 +34,3 @@ setuptools==76.0.0
 setuptools-metadata==0.1.5
 types-requests==2.32.0.20250306
 types-setuptools==76.0.0.20250313
->>>>>>> cf284f9db618c5c386b0525d6b7f4798c5808747
