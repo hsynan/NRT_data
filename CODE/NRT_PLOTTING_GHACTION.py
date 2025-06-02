@@ -27,11 +27,12 @@ warnings.filterwarnings('ignore', category=SyntaxWarning)
 warnings.filterwarnings('ignore', category=UserWarning)
 
 #set local directory
-try: 
-    data_dir = r'C:\Users\haley.synan\Documents\DATA\NRT_DATA'
-    os.chdir(data_dir)
-except: 
-    data_dir = os.getcwd()
+#try: 
+#    data_dir = r'C:\Users\haley.synan\Documents\DATA\NRT_DATA'
+#    os.chdir(data_dir)
+#except: 
+data_dir = os.getcwd()
+os.chdir(data_dir)
     
     
 folds= os.popen('gsutil ls gs://nmfs_odp_nefsc/NEFSC_CTD_Program_near_real_time_data').read().split('\n')[2:-2]
@@ -194,8 +195,9 @@ for x in range(len(fnames)):
                     cb.ax.invert_yaxis()
                     fig.tight_layout()
                     plt.show()
+                    fig.savefig(plotdir + '\Cast_'+str(date).split(' ')[0]+'_'+str(date).split(' ')[1].replace(":", "")+ '.jpg',  dpi=400, bbox_inches='tight')
                     #fig.savefig(plotdir + '\Cast'+supname.splitlines()[0].split()[2]+ supname.splitlines()[0].split()[0]+ '.jpg',  dpi=400, bbox_inches='tight') #, pad_inches = -4)
-                    fig.savefig(r'C:\\Users\\haley.synan\\Documents\\DATA\\NRT_DATA\\'+proj_name + '/PLOTS'+'/Cast'+supname.splitlines()[0].split()[2]+ supname.splitlines()[0].split()[0]+ '.jpg',  dpi=400, bbox_inches='tight') 
+                    #fig.savefig(r'C:\\Users\\haley.synan\\Documents\\DATA\\NRT_DATA\\'+proj_name + '/PLOTS'+'/Cast'+supname.splitlines()[0].split()[2]+ supname.splitlines()[0].split()[0]+ '.jpg',  dpi=400, bbox_inches='tight') 
                     #fig.savefig(proj_name + '/PLOTS'+'/Cast'+supname.splitlines()[0].split()[2]+ supname.splitlines()[0].split()[0]+ '.jpg',  dpi=400, bbox_inches='tight') #, pad_inches = -4)
             except:
                 continue
