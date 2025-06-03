@@ -194,8 +194,8 @@ for x in range(len(fnames)):
             #fig.savefig(plotdir + '\Cast'+supname.splitlines()[0].split()[2]+ supname.splitlines()[0].split()[0]+ '.jpg',  dpi=400, bbox_inches='tight') #, pad_inches = -4)
             #fig.savefig(r'C:\\Users\\haley.synan\\Documents\\DATA\\NRT_DATA\\'+proj_name + '/PLOTS'+'/Cast'+supname.splitlines()[0].split()[2]+ supname.splitlines()[0].split()[0]+ '.jpg',  dpi=400, bbox_inches='tight') 
             #fig.savefig(proj_name + '/PLOTS'+'/Cast'+supname.splitlines()[0].split()[2]+ supname.splitlines()[0].split()[0]+ '.jpg',  dpi=400, bbox_inches='tight') #, pad_inches = -4)
-    except:
-        continue
+        except:
+            continue
         
 #push to github
 #os.chdir(data_dir)
