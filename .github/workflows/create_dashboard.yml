@@ -24,10 +24,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements_dashboard.txt
           
-      - name: execute py script # run CODE/app.py
+      - name: build dashboard
         env:
           SOME_SECRET: ${{ secrets.SOME_SECRET }}
-        run: python CODE/app.py
+        run: panel serve CODE/app.py --show
           
       - name: commit files
         run: |
