@@ -27,7 +27,7 @@ jobs:
       - name: build dashboard
         env:
           SOME_SECRET: ${{ secrets.SOME_SECRET }}
-        run: panel serve CODE/app.py --show
+        run: panel convert app.py --to pyodide --out ./dashboard
           
       - name: commit files
         run: |
