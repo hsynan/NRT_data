@@ -35,15 +35,16 @@ import urllib.request
 import cartopy
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 import cartopy.feature as cfeature
-from shapely.ops import cascaded_union
+from shapely.ops import unary_union
 from glob import glob
 import gsw
+from datetime import datetime
 warnings.filterwarnings('ignore', category=SyntaxWarning)
 warnings.filterwarnings('ignore', category=UserWarning)
 
 #set local directory
 try: 
-    data_dir = r'C:\Users\haley.synan\Documents\DATA\NRT_DATA'
+    data_dir = r'C:\Users\haley.synan\Documents\DATA\NRT_new'
 except: 
     data_dir = os.getcwd()
     
@@ -65,7 +66,7 @@ fnames = os.popen('gsutil ls gs://nmfs_odp_nefsc/NEFSC_CTD_Program_near_real_tim
 #fnames=fnames.list
 
 bathym = cfeature.NaturalEarthFeature(name='bathymetry_K_200', scale='10m', category='physical')
-bathym = cascaded_union(list(bathym.geometries()))
+bathym = unary_union(list(bathym.geometries()))
 
 for x in range(len(fnames)): 
     proj_name = fnames[x].split('/')[4]
@@ -92,6 +93,8 @@ for x in range(len(fnames)):
                 file = fCNV(file)
                 lat = file.attributes['LATITUDE']
                 lon = file.attributes['LONGITUDE']
+                date = file.attributes['gps_datetime']
+                d8 = str(datetime.strptime(date.split('  ')[0], "%b %d %Y"))+'_'+date.split('  ')[1].replace(':','')
                 try: #check if sbe or ctd profile 
                     cast.t090C
                     cast = cast.rename(columns={"t090C": "temp"})
@@ -188,7 +191,7 @@ for x in range(len(fnames)):
                     cb.ax.invert_yaxis()
                     fig.tight_layout()
                     plt.show()
-                    fig.savefig(plotdir + '\Cast'+supname.splitlines()[0].split()[2]+ supname.splitlines()[0].split()[0]+ '.jpg',  dpi=400, bbox_inches='tight') #, pad_inches = -4)
+                    fig.savefig(plotdir + '\Cast_'+str(datetime.strptime(date.split('  ')[0], "%b %d %Y")).split(' ')[0]+'_'+date.split('  ')[1].replace(':','')+ '.jpg',  dpi=400, bbox_inches='tight') #, pad_inches = -4)
             except:
                 continue
             
