@@ -58,7 +58,7 @@ new_d8 = date.today() #get todays date
 new_d8 = new_d8 - timedelta(days=2) #get last weeks date (this script will be run weekly)
 
 aa = [s[12:].split('  ')[0].split('T')[0] for s in a]
-aa= aa[:-2] #remove last 2 strings in list (they are metadata, not valid dates)
+aa= aa[:-2] #remove last 2 strings in list (they are metadata, not valid daf)
 d8 = [datetime.strptime(date, "%Y-%m-%d").date() for date in aa]
 
 idx= [i for i, element in enumerate(d8) if element >= new_d8] #get indices for dates to plot
