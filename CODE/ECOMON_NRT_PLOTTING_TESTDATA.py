@@ -223,12 +223,12 @@ for x in range(len(fnames)):
             #    continue
             
 #push to github
-#os.chdir(data_dir)
-#os.system('git pull origin main')
+os.chdir(data_dir)
+os.system('git pull origin main')
 #add all changed files, commit with message, and push
-#os.system('git add --all')
-#os.system('git commit -m "adding new plots"')
-#os.system('git push -u origin head')
+os.system('git add --all')
+os.system('git commit -m "adding new plots"')
+os.system('git push -u origin head')
 
 
 

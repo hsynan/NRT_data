@@ -65,8 +65,8 @@ for cruise in folds:
 fnames = os.popen('gsutil ls gs://nmfs_odp_nefsc/NEFSC_CTD_Program_near_real_time_data/*/*.cnv').read().split('\n')[:-1]
 #fnames=fnames.list
 
-bathym = cfeature.NaturalEarthFeature(name='bathymetry_K_200', scale='10m', category='physical')
-bathym = unary_union(list(bathym.geometries()))
+#bathym = cfeature.NaturalEarthFeature(name='bathymetry_K_200', scale='10m', category='physical')
+#bathym = unary_union(list(bathym.geometries()))
 
 for x in range(len(fnames)): 
     proj_name = fnames[x].split('/')[4]
@@ -121,7 +121,7 @@ for x in range(len(fnames)):
                     ax1.set_title("Station Location")
                     ax1.set_xlim([-77,-63])
                     ax1.set_ylim([35,46])
-                    ax1.add_geometries(bathym, facecolor='none', edgecolor='black', crs=cartopy.crs.PlateCarree())
+                    #ax1.add_geometries(bathym, facecolor='none', edgecolor='black', crs=cartopy.crs.PlateCarree())
                     ax1.add_feature(cartopy.feature.LAND, zorder=100, facecolor='lightgrey') 
                     ax1.set_xticks(np.linspace(-78, -63.4, 5), crs=cartopy.crs.PlateCarree())
                     ax1.set_yticks(np.linspace(34.3, 47, 5), crs=cartopy.crs.PlateCarree())
