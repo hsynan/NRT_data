@@ -44,7 +44,7 @@ warnings.filterwarnings('ignore', category=UserWarning)
 
 #set local directory
 try: 
-    data_dir = r'C:\Users\haley.synan\Documents\DATA\NRT_new'
+    data_dir = r'C:\Users\haley.synan\Documents\DATA\NRT_DATA'
 except: 
     data_dir = os.getcwd()
     
